@@ -1,18 +1,23 @@
 {% extends 'portfolio/base.html' %}
 {% block content %}
-
-<h1>My blog</h1>
-<br>
-<h2>Ruslan has written {{ blogs.count }} blog{{ blogs.count|pluralize }}</h2>
 {% for blog in blogs %}
-<div width='500px'>
-    <a href="{% url 'blog:detail' blog.id %}">
-        <h3>{{ blog.title }}</h3>
-    </a>
-    <p>{{ blog.description|striptags|truncatechars:250  }}<br><i>{{ blog.date|date:'l j F y' }}</i></p>
-    
+<div class="container" style="padding-top: 40px">
+<article class="blog-post">
+    <h2 class="blog-post-title mb-1">
+        <a href="{% url 'blog:detail' blog.id %}" class="link-dark">
+            {{ blog.title }}
+        </a>
+    </h2>
+    <p class="blog-post-meta">
+        {{ blog.date|date:'l j F y' }}
+    </p>
+    <a href="{% url 'blog:detail' blog.id %}" style="text-decoration: none; color: black">
+    <p>
+    {{ blog.description|striptags|truncatechars:350  }}
+    </p>
+</a>
+    <hr>
+</article>
 </div>
 {% endfor %}
-<br>
-
 {% endblock %}

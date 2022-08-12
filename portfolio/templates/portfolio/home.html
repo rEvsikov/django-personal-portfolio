@@ -1,22 +1,42 @@
 {% extends 'portfolio/base.html' %}
 {% block content %}
-    <h1>This is my portfolio</h1>
-    {% load static %}
-    <a href="{% url 'blog:all_blogs' %}">My blog</a>
-    <br>
-    <img src="{% static 'portfolio/my_photo.jpg' %}" style="width:450px">
-    <div class="container">
-    {% for project in projects %}
-    <div class="card" style="width: 18rem;">
-        <img src="{{ project.image.url }}" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">{{ project.title }}</h5>
-          <p class="card-text">{{ project.description }}</p>
+{% load static %}
+<main class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="background-image:url({% static 'portfolio/my_photo.jpg' %}); background-position: center; min-height: 100vh; width: 100%">
+  <div class="container">
+    <div class="p-4 p-md-5 mb-4 rounded text-bg-dark">
+      <div class="col-md-6 px-0">
+        <h1 class="display-4 fst-italic">Портфолио на Django4 + Bootstrap5</h1>
+        <p class="lead my-3">Этот сайт выполнен в рамакх прохождения курса "Django 3 - Full Stack разработка веб-сайтов на Python".</p>
+      </div>
+    </div>
+  </div>
+</main>
+<div class="album py-5 bg-light">
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+     
+  {% for project in projects %}
+  <div class="col">
+    <div class="card shadow-sm text-center">
+      <div class="bd-placeholder-img card-img-top" style="width: 100%; height: 300px; background-image: url({{ project.image.url }}); background-position: center; background-size: cover">
+      </div>
+      <div class="card-body">
+        <h5 class="card title">
+          {{ project.title }}
+        </h5>
+        <p class="card-text">{{ project.description }}</p>
+        <div class="d-flex justify-content-between align-items-center">
           {% if project.url %}
-          <a href="{{ project.url }}" class="btn btn-primary">Link</a>
+            <div class="btn-group">
+              <a href="{{ project.url }}" class="btn btn-sm btn-outline-secondary">Посмотреть</a>
+            </div>
           {% endif %}
         </div>
       </div>
-    {% endfor %}
     </div>
+  </div>
+  {% endfor %}
+   
+</div>
+</div>
 {% endblock %}
